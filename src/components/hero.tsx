@@ -1,8 +1,9 @@
 import { Countdown } from "./countdown";
 import { useLang } from "@/lib/lang-context";
 import { motion } from "framer-motion";
+import heroAsset from "@/assets/hero-couple.png.asset.json";
 
-const HERO = "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=2400&q=80";
+const HERO = heroAsset.url;
 
 export function Hero() {
   const { t } = useLang();
@@ -13,7 +14,7 @@ export function Hero() {
         animate={{ scale: 1 }}
         transition={{ duration: 2.4, ease: [0.22, 1, 0.36, 1] }}
         src={HERO}
-        alt="Luxury Maldives beach resort at dusk"
+        alt="Miriam and Michael in Valencia"
         className="absolute inset-0 h-full w-full object-cover"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-ink/40 via-ink/20 to-ink/70" />
