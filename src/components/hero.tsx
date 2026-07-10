@@ -14,7 +14,7 @@ export function Hero() {
         animate={{ scale: 1 }}
         transition={{ duration: 2.4, ease: [0.22, 1, 0.36, 1] }}
         src={HERO}
-        alt="Luxury Maldives beach resort at dusk"
+        alt="Miriam and Michael in Valencia"
         className="absolute inset-0 h-full w-full object-cover"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-ink/40 via-ink/20 to-ink/70" />
