@@ -140,6 +140,6 @@ export const translations = {
     },
     footer: { close: "We can't wait to celebrate with you.", credit: "Designed by Zylo Invites" },
   },
-} as const;
+};
 
 export type Dict = typeof translations["ES"];
