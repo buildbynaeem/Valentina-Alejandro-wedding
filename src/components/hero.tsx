@@ -1,8 +1,9 @@
 import { Countdown } from "./countdown";
 import { useLang } from "@/lib/lang-context";
 import { motion } from "framer-motion";
+import heroAsset from "@/assets/hero-couple.png.asset.json";
 
-const HERO = "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=2400&q=80";
+const HERO = heroAsset.url;
 
 export function Hero() {
   const { t } = useLang();
