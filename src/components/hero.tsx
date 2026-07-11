@@ -22,7 +22,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 1 }}
-          className="text-[11px] tracked text-cream/80"
+          className="text-[13px] tracked text-cream/80 font-bold"
         >
           {t.hero.kicker}
         </motion.div>
@@ -43,7 +43,7 @@ export function Hero() {
           className="mt-8 flex items-center gap-4 text-cream/85"
         >
           <span className="h-px w-10 bg-gold" />
-          <span className="text-xs md:text-sm tracked">{t.hero.date}</span>
+          <span className="text-sm md:text-base tracked font-bold">{t.hero.date}</span>
           <span className="h-px w-10 bg-gold" />
         </motion.div>
       </div>

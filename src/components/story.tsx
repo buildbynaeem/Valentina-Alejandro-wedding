@@ -38,8 +38,10 @@ export function Story() {
       const lastTop = getOffsetTop(lastDotRef.current, timelineRef.current) + lastDotRef.current.offsetHeight / 2;
       setLineTop(firstTop);
       setLineBottom(containerH - lastTop);
-      // Initialise flower position and reveal it
-      flowerTop.set(firstTop);
+      // Reposition flower using current scroll progress so language switches
+      // mid-scroll don't snap the flower back to the first dot.
+      const v = scrollYProgress.get();
+      flowerTop.set(firstTop + (lastTop - firstTop) * v);
       setIsReady(true);
     };
     const raf = requestAnimationFrame(measure);
@@ -48,7 +50,7 @@ export function Story() {
       cancelAnimationFrame(raf);
       window.removeEventListener("resize", measure);
     };
-  }, []);
+  }, [t, scrollYProgress, flowerTop]);
 
   useEffect(() => {
     const getOffsetTop = (el: HTMLElement, ancestor: HTMLElement): number => {
@@ -70,7 +72,7 @@ export function Story() {
     });
 
     return unsubscribe;
-  }, [scrollYProgress, flowerTop]);
+  }, [scrollYProgress, flowerTop, t]);
 
   return (
     <section id="story" className="relative py-32 md:py-44 px-6">
