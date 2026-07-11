@@ -4,8 +4,7 @@ import { MapPin, Clock, Shirt, ArrowUpRight } from "lucide-react";
 
 const MAP_URL =
   "https://www.google.com/maps/dir/?api=1&destination=Iglesia+de+San+Juan+de+la+Cruz+Valencia";
-const STATIC_MAP =
-  "https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=1400&q=80";
+const STATIC_MAP = "/location.png";
 
 export function Details() {
   const { t } = useLang();
@@ -66,7 +65,7 @@ export function Details() {
             >
               <img
                 src={STATIC_MAP}
-                alt="Valencia map"
+                alt="Ceremony location"
                 className="absolute inset-0 h-full w-full object-cover grayscale contrast-125 opacity-60 transition-transform duration-[1500ms] group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-transparent" />

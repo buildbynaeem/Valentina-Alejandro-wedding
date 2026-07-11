@@ -87,7 +87,7 @@ export function Story() {
       <FadeUp>
         <div className="mx-auto max-w-2xl mt-16 md:mt-20">
           <img
-            src="/story.png"
+            src="/story.webp"
             alt="Our story"
             className="w-full rounded-2xl object-cover shadow-[0_8px_60px_rgba(0,0,0,0.12)]"
           />

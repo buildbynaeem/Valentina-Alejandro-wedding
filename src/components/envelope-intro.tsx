@@ -55,11 +55,12 @@ export function EnvelopeIntro({ onDone }: { onDone: () => void }) {
           {/* Video — shows first frame in idle, plays in playing */}
           <video
             ref={videoRef}
-            src="/envelope.mp4"
             playsInline
             preload="auto"
             className="absolute inset-0 h-full w-full object-cover"
-          />
+          >
+            <source src="/envelope.webm" type="video/webm" />
+          </video>
 
           {/* "Tap to open" overlay — only in idle */}
           <AnimatePresence>
