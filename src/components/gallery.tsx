@@ -1,24 +1,45 @@
 import { useLang } from "@/lib/lang-context";
 import { FadeUp } from "./fade-up";
+import { AnimatePresence, motion } from "framer-motion";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useEffect, useState } from "react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  type CarouselApi,
+} from "@/components/ui/carousel";
+import { cn } from "@/lib/utils";
 
 const IMAGES = [
-  { src: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80", h: "row-span-2", alt: "Bride and groom" },
-  { src: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80", h: "", alt: "Turquoise coastline" },
-  { src: "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=1200&q=80", h: "", alt: "Wedding hands" },
-  { src: "https://images.unsplash.com/photo-1494891848038-7bd202a2afeb?auto=format&fit=crop&w=1200&q=80", h: "row-span-2", alt: "Architecture" },
-  { src: "https://images.unsplash.com/photo-1520880867055-1e30d1cb001c?auto=format&fit=crop&w=1200&q=80", h: "", alt: "Overwater villa" },
-  { src: "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1200&q=80", h: "", alt: "Beach couple" },
-  { src: "https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1200&q=80", h: "", alt: "Wedding details" },
-  { src: "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=1200&q=80", h: "", alt: "Valencia street" },
+  { src: "/Moments/1.png",  alt: "Moment 1",  title: "Miriam & Michael" },
+  { src: "/Moments/2.png",  alt: "Moment 2",  title: "Together" },
+  { src: "/Moments/3.png",  alt: "Moment 3",  title: "Valencia" },
+  { src: "/Moments/4.png",  alt: "Moment 4",  title: "Golden Hour" },
+  { src: "/Moments/5.png",  alt: "Moment 5",  title: "España" },
+  { src: "/Moments/6.png",  alt: "Moment 6",  title: "Love" },
+  { src: "/Moments/7.png",  alt: "Moment 7",  title: "Joy" },
+  { src: "/Moments/8.png",  alt: "Moment 8",  title: "Forever" },
+  { src: "/Moments/9.png",  alt: "Moment 9",  title: "Zurich" },
+  { src: "/Moments/10.png", alt: "Moment 10", title: "Us" },
 ];
 
 export function Gallery() {
   const { t } = useLang();
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    if (!api) return;
+    api.on("select", () => setCurrent(api.selectedScrollSnap()));
+  }, [api]);
+
   return (
-    <section id="gallery" className="py-32 md:py-44 px-6 bg-cream">
-      <div className="mx-auto max-w-7xl">
+    <section id="gallery" className="py-32 md:py-44 bg-cream overflow-hidden">
+      {/* Header */}
+      <div className="px-6 mx-auto max-w-7xl mb-14">
         <FadeUp>
-          <div className="flex items-end justify-between flex-wrap gap-6 mb-14">
+          <div className="flex items-end justify-between flex-wrap gap-6">
             <div>
               <div className="text-[11px] tracked text-gold">{t.gallery.kicker}</div>
               <h2 className="mt-4 font-serif text-4xl md:text-6xl italic">{t.gallery.title}</h2>
@@ -26,23 +47,96 @@ export function Gallery() {
             <span className="gold-divider" />
           </div>
         </FadeUp>
-
-        <div className="grid grid-cols-2 md:grid-cols-4 auto-rows-[220px] md:auto-rows-[260px] gap-3 md:gap-4">
-          {IMAGES.map((img, i) => (
-            <FadeUp key={i} delay={i * 0.05} className={img.h}>
-              <div className="group relative h-full w-full overflow-hidden rounded-sm">
-                <img
-                  src={img.src}
-                  alt={img.alt}
-                  loading="lazy"
-                  className="h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-ink/0 group-hover:bg-ink/10 transition-colors duration-500" />
-              </div>
-            </FadeUp>
-          ))}
-        </div>
       </div>
+
+      {/* Carousel */}
+      <FadeUp>
+        <Carousel
+          setApi={setApi}
+          className="w-full"
+          opts={{ loop: true, slidesToScroll: 1 }}
+        >
+          <CarouselContent className="flex h-[480px] md:h-[560px] w-full">
+            {IMAGES.map((img, index) => (
+              <CarouselItem
+                key={index}
+                className="relative flex h-[82%] w-full basis-[80%] items-center justify-center sm:basis-[55%] md:basis-[35%] lg:basis-[28%] xl:basis-[24%]"
+              >
+                <motion.div
+                  initial={false}
+                  animate={{
+                    clipPath:
+                      current !== index
+                        ? "inset(12% 0 12% 0 round 1.5rem)"
+                        : "inset(0% 0% 0% 0% round 1.5rem)",
+                  }}
+                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                  className="h-full w-full overflow-hidden rounded-3xl"
+                >
+                  <img
+                    src={img.src}
+                    alt={img.alt}
+                    loading="lazy"
+                    className="h-full w-full scale-105 object-cover"
+                  />
+                </motion.div>
+
+                {/* Title below active slide */}
+                <AnimatePresence mode="wait">
+                  {current === index && (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, filter: "blur(10px)" }}
+                      animate={{ opacity: 1, filter: "blur(0px)" }}
+                      exit={{ opacity: 0, filter: "blur(10px)" }}
+                      transition={{ duration: 0.4 }}
+                      className="absolute bottom-0 left-0 flex h-[14%] w-full translate-y-full items-center justify-center text-center font-serif italic text-ink/40 tracking-wide text-sm"
+                    >
+                      {img.title}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+
+          {/* Navigation arrows */}
+          <div className="mt-10 flex w-full items-center justify-center gap-4">
+            <button
+              aria-label="Previous slide"
+              onClick={() => api?.scrollPrev()}
+              className="rounded-full border border-gold/40 bg-cream p-2.5 text-ink/60 hover:bg-gold/10 hover:text-ink transition-colors"
+            >
+              <ChevronLeft className="h-4 w-4" />
+            </button>
+
+            {/* Pagination dots */}
+            <div className="flex items-center gap-2">
+              {IMAGES.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => api?.scrollTo(index)}
+                  aria-label={`Go to slide ${index + 1}`}
+                  className={cn(
+                    "rounded-full transition-all duration-300",
+                    current === index
+                      ? "w-6 h-2 bg-gold"
+                      : "w-2 h-2 bg-gold/30"
+                  )}
+                />
+              ))}
+            </div>
+
+            <button
+              aria-label="Next slide"
+              onClick={() => api?.scrollNext()}
+              className="rounded-full border border-gold/40 bg-cream p-2.5 text-ink/60 hover:bg-gold/10 hover:text-ink transition-colors"
+            >
+              <ChevronRight className="h-4 w-4" />
+            </button>
+          </div>
+        </Carousel>
+      </FadeUp>
     </section>
   );
 }

@@ -1,22 +1,20 @@
 import { Countdown } from "./countdown";
 import { useLang } from "@/lib/lang-context";
 import { motion } from "framer-motion";
-import heroAsset from "@/assets/hero-couple.png.asset.json";
-
-const HERO = heroAsset.url;
 
 export function Hero() {
   const { t } = useLang();
   return (
     <section id="top" className="relative h-[100svh] min-h-[720px] w-full overflow-hidden">
-      <motion.img
-        initial={{ scale: 1.15 }}
-        animate={{ scale: 1 }}
-        transition={{ duration: 2.4, ease: [0.22, 1, 0.36, 1] }}
-        src={HERO}
-        alt="Miriam and Michael in Valencia"
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
         className="absolute inset-0 h-full w-full object-cover"
-      />
+      >
+        <source src="/1.mp4" type="video/mp4" />
+      </video>
       <div className="absolute inset-0 bg-gradient-to-b from-ink/40 via-ink/20 to-ink/70" />
 
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-cream px-6 text-center">
