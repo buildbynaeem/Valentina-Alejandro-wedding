@@ -28,7 +28,9 @@ export const translations = {
       venue: "Iglesia de San Juan de la Cruz",
       address: "C. del Poeta Querol, 6, Ciutat Vella, 46002 València, España",
       directions: "Cómo llegar",
+      timeLabel: "Hora",
       time: "17:00 h",
+      dressLabel: "Vestimenta",
       dress: "Etiqueta formal",
     },
     rsvp: {
@@ -73,7 +75,9 @@ export const translations = {
       venue: "Iglesia de San Juan de la Cruz",
       address: "C. del Poeta Querol, 6, Ciutat Vella, 46002 València, Spanien",
       directions: "Wegbeschreibung",
+      timeLabel: "Uhrzeit",
       time: "17:00 Uhr",
+      dressLabel: "Dresscode",
       dress: "Formelle Kleidung",
     },
     rsvp: {
@@ -118,7 +122,9 @@ export const translations = {
       venue: "Iglesia de San Juan de la Cruz",
       address: "C. del Poeta Querol, 6, Ciutat Vella, 46002 València, Spain",
       directions: "Get directions",
+      timeLabel: "Time",
       time: "5:00 PM",
+      dressLabel: "Dress code",
       dress: "Formal attire",
     },
     rsvp: {

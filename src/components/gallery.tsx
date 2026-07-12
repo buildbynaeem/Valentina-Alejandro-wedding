@@ -12,16 +12,16 @@ import {
 import { cn } from "@/lib/utils";
 
 const IMAGES = [
-  { src: "/Moments/1.webp",  alt: "Moment 1",  title: "Miriam & Michael" },
-  { src: "/Moments/2.webp",  alt: "Moment 2",  title: "Together" },
-  { src: "/Moments/3.webp",  alt: "Moment 3",  title: "Valencia" },
-  { src: "/Moments/4.webp",  alt: "Moment 4",  title: "Golden Hour" },
-  { src: "/Moments/5.webp",  alt: "Moment 5",  title: "España" },
-  { src: "/Moments/6.webp",  alt: "Moment 6",  title: "Love" },
-  { src: "/Moments/7.webp",  alt: "Moment 7",  title: "Joy" },
-  { src: "/Moments/8.webp",  alt: "Moment 8",  title: "Forever" },
-  { src: "/Moments/9.webp",  alt: "Moment 9",  title: "Zurich" },
-  { src: "/Moments/10.webp", alt: "Moment 10", title: "Us" },
+  { src: "/Moments/1.webp", alt: "Moment 1", title: "Miriam & Michael" },
+  { src: "/Moments/2.webp", alt: "Moment 2", title: "Together" },
+  { src: "/Moments/3.webp", alt: "Moment 3", title: "Valencia" },
+  { src: "/Moments/4.webp", alt: "Moment 4", title: "Our Dream Trip" },
+  { src: "/Moments/5.webp", alt: "Moment 5", title: "España" },
+  { src: "/Moments/6.webp", alt: "Moment 6", title: "Same Direction" },
+  { src: "/Moments/7.webp", alt: "Moment 7", title: "Aventura" },
+  { src: "/Moments/8.webp", alt: "Moment 8", title: "She Said Yes" },
+  { src: "/Moments/9.webp", alt: "Moment 9", title: "Our Ringmoon" },
+  { src: "/Moments/10.webp", alt: "Moment 10", title: "Celebrando el compromiso" },
 ];
 
 export function Gallery() {

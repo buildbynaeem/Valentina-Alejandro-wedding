@@ -31,14 +31,14 @@ export function Details() {
                 <div>
                   <div className="flex items-center gap-2 text-gold">
                     <Clock className="h-4 w-4" />
-                    <span className="text-[10px] tracked">Hora</span>
+                    <span className="text-[10px] tracked">{t.details.timeLabel}</span>
                   </div>
                   <div className="mt-2 font-serif text-xl">{t.details.time}</div>
                 </div>
                 <div>
                   <div className="flex items-center gap-2 text-gold">
                     <Shirt className="h-4 w-4" />
-                    <span className="text-[10px] tracked">Dress</span>
+                    <span className="text-[10px] tracked">{t.details.dressLabel}</span>
                   </div>
                   <div className="mt-2 font-serif text-xl">{t.details.dress}</div>
                 </div>
