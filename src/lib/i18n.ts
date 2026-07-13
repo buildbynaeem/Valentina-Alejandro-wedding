@@ -42,8 +42,8 @@ export const translations = {
       cardLabel2: "Ciudad de las Artes",
     },
     rsvp: {
-      kicker: "Confirma tu asistencia",
-      title: "Portal VIP",
+      kicker: "RESERVA TU LUGAR",
+      title: "RSVP",
       name: "Nombre completo",
       email: "Correo electrónico",
       attending: "¿Nos acompañarás?",
@@ -106,8 +106,8 @@ export const translations = {
       cardLabel2: "Stadt der Künste",
     },
     rsvp: {
-      kicker: "Bitte um Rückmeldung",
-      title: "VIP-Portal",
+      kicker: "WIR FREUEN UNS AUF EUCH",
+      title: "RSVP",
       name: "Vollständiger Name",
       email: "E-Mail",
       attending: "Wirst du dabei sein?",
@@ -170,8 +170,8 @@ export const translations = {
       cardLabel2: "City of Arts",
     },
     rsvp: {
-      kicker: "Please respond",
-      title: "VIP RSVP portal",
+      kicker: "JOIN THE CELEBRATION",
+      title: "RSVP",
       name: "Full name",
       email: "Email",
       attending: "Will you join us?",
