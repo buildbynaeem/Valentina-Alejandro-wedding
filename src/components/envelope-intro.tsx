@@ -85,7 +85,7 @@ export function EnvelopeIntro({ onDone }: { onDone: () => void }) {
         initial={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.8, ease: "easeInOut" }}
-        className="fixed inset-0 z-[100] select-none overflow-hidden"
+        className="fixed inset-0 z-[100] select-none overflow-hidden min-h-[100dvh] bg-[#f8f5f0]"
         // Clicking anywhere on the overlay triggers the tap handler
         onClick={handleTap}
         style={{ cursor: envelopeState === "idle" ? "pointer" : "default" }}

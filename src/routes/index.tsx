@@ -17,22 +17,20 @@ export const Route = createFileRoute("/")({
 function Index() {
   const [introPlayed, setIntroPlayed] = useState(false);
 
-  return (
-    <>
-      {/* Envelope intro — disappears once video ends */}
-      {!introPlayed && <EnvelopeIntro onDone={() => setIntroPlayed(true)} />}
+  if (!introPlayed) {
+    return <EnvelopeIntro onDone={() => setIntroPlayed(true)} />;
+  }
 
-      {/* Main site — always in the DOM but hidden behind the overlay */}
-      <main className="bg-cream text-ink">
-        <Nav />
-        <Hero />
-        <Story />
-        <Gallery />
-        <Details />
-        <Rsvp />
-        <Closing />
-        <Footer />
-      </main>
-    </>
+  return (
+    <main className="bg-cream text-ink">
+      <Nav />
+      <Hero />
+      <Story />
+      <Gallery />
+      <Details />
+      <Rsvp />
+      <Closing />
+      <Footer />
+    </main>
   );
 }
