@@ -16,7 +16,7 @@ const IMAGES = [
   { src: "/Moments/2.webp", alt: "Moment 2", title: "Together" },
   { src: "/Moments/3.webp", alt: "Moment 3", title: "Valencia" },
   { src: "/Moments/4.webp", alt: "Moment 4", title: "Our Dream Trip" },
-  { src: "/Moments/5.webp", alt: "Moment 5", title: "España" },
+  { src: "/Moments/5.webp", alt: "Moment 5", title: "Trusting the process" },
   { src: "/Moments/6.webp", alt: "Moment 6", title: "Same Direction" },
   { src: "/Moments/7.webp", alt: "Moment 7", title: "Aventura" },
   { src: "/Moments/8.webp", alt: "Moment 8", title: "She Said Yes" },

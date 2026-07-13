@@ -1,71 +1,83 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-// Duration of envelope.webm in ms — failsafe fires at VIDEO_DURATION_MS + 500ms
-const VIDEO_DURATION_MS = 8000;
+// ─── Constants ──────────────────────────────────────────────────────────────
+// Set to 500ms longer than the actual video duration to guarantee the natural
+// onEnded handler fires first. Update this if the video length changes.
+const FAILSAFE_MS = 8500;
 
-type EnvelopeState = "idle" | "opening" | "opened";
-
+// ─── Component ──────────────────────────────────────────────────────────────
 export function EnvelopeIntro({ onDone }: { onDone: () => void }) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [envelopeState, setEnvelopeState] = useState<EnvelopeState>("idle");
-  const failsafeRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  // Strict state machine — component is always locked in 'idle' on mount.
+  const [envelopeState, setEnvelopeState] = useState<"idle" | "opening" | "opened">("idle");
 
-  // ── Measure #1: Seek to first frame so it acts as a poster while idle ──
+  const videoRef      = useRef<HTMLVideoElement>(null);
+  const failsafeRef   = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // ── Seek to first frame so the video acts as a static poster while idle ──
+  // No timers are started here — this is purely a visual initialisation.
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
-    const handleMeta = () => {
-      video.currentTime = 0.001;
-    };
-    video.addEventListener("loadedmetadata", handleMeta);
-    return () => video.removeEventListener("loadedmetadata", handleMeta);
+    const onMeta = () => { video.currentTime = 0.001; };
+    video.addEventListener("loadedmetadata", onMeta);
+    return () => video.removeEventListener("loadedmetadata", onMeta);
   }, []);
 
-  // ── Measure #2: Listen for video end (normal path) ──
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-    const handleEnd = () => {
-      if (failsafeRef.current) clearTimeout(failsafeRef.current);
-      setTimeout(() => {
-        setEnvelopeState("opened");
-        setTimeout(onDone, 800);
-      }, 150);
-    };
-    video.addEventListener("ended", handleEnd);
-    return () => video.removeEventListener("ended", handleEnd);
-  }, [onDone]);
+  // ── Complete unmount when state reaches 'opened' ─────────────────────────
+  // Returning null removes the video and overlay entirely from the DOM so
+  // there are no z-index ghosts or click-blocking layers on iPhones.
+  if (envelopeState === "opened") {
+    return null;
+  }
 
+  // ── "Tap to Open" click handler ──────────────────────────────────────────
+  // Only reachable when envelopeState === 'idle'. Executes in strict order:
+  //   1. Lock state so double-taps are ignored
+  //   2. Unmute (required so audio plays after the initial muted load)
+  //   3. Play (returns a Promise — .catch handles Safari/WebKit rejection)
+  //   4. Start failsafe timer ONLY here, never on mount
   const handleTap = () => {
     if (envelopeState !== "idle") return;
     const video = videoRef.current;
     if (!video) return;
 
-    video.currentTime = 0;
+    // Step 1 — lock
     setEnvelopeState("opening");
 
-    // ── Measure #3: Failsafe timeout — fires if onEnded never triggers (iOS stall) ──
+    // Step 2 — unmute so audio plays
+    video.muted = false;
+
+    // Step 3 — play (Promise-safe for Safari)
+    video.currentTime = 0;
+    video.play().catch((e) => {
+      console.log("iOS play() blocked:", e);
+      // If Safari refuses to play, skip straight to opened
+      if (failsafeRef.current) clearTimeout(failsafeRef.current);
+      setEnvelopeState("opened");
+      onDone();
+    });
+
+    // Step 4 — failsafe timer (started ONLY on tap, never on mount)
     failsafeRef.current = setTimeout(() => {
       setEnvelopeState("opened");
       onDone();
-    }, VIDEO_DURATION_MS + 500); // slight buffer over video length
-
-    // ── Measure #2: Catch the Safari Promise rejection ──
-    const playPromise = video.play();
-    if (playPromise !== undefined) {
-      playPromise.catch(() => {
-        console.log("iOS blocked video play — bypassing to open state.");
-        if (failsafeRef.current) clearTimeout(failsafeRef.current);
-        setEnvelopeState("opened");
-        onDone();
-      });
-    }
+    }, FAILSAFE_MS);
   };
 
-  // ── Measure #4: Completely unmount once opened — never just hide with CSS ──
-  if (envelopeState === "opened") return null;
+  // ── Natural video completion handler ─────────────────────────────────────
+  const handleEnded = () => {
+    // Destroy the failsafe so it doesn't fire after the video already finished
+    if (failsafeRef.current) {
+      clearTimeout(failsafeRef.current);
+      failsafeRef.current = null;
+    }
+    setEnvelopeState("opened");
+    // Small pause before revealing the site gives a smoother feel
+    setTimeout(onDone, 400);
+  };
 
+  // ─── Render ───────────────────────────────────────────────────────────────
   return (
     <AnimatePresence>
       <motion.div
@@ -73,22 +85,29 @@ export function EnvelopeIntro({ onDone }: { onDone: () => void }) {
         initial={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.8, ease: "easeInOut" }}
-        className="fixed inset-0 z-[100] cursor-pointer select-none"
+        className="fixed inset-0 z-[100] select-none overflow-hidden"
+        // Clicking anywhere on the overlay triggers the tap handler
         onClick={handleTap}
+        style={{ cursor: envelopeState === "idle" ? "pointer" : "default" }}
       >
-        {/* Video — explicit iOS attributes to block native player takeover */}
+        {/* ── Video ──────────────────────────────────────────────────────── */}
+        {/* muted={true} is required so mobile browsers allow loading/preload. */}
+        {/* We unmute imperatively inside handleTap before calling .play().    */}
+        {/* poster="/envelope-poster.jpg" — add a static frame image here      */}
+        {/* once you have one; the loadedmetadata seek handles it for now.     */}
         <video
           ref={videoRef}
-          playsInline={true}   /* crucial for iOS — prevents fullscreen takeover */
-          muted={true}          /* required for autoplay policies              */
-          autoPlay={false}      /* we control play() manually on tap           */
-          preload="auto"        /* buffer the file before the tap              */
+          playsInline                  /* prevents iOS fullscreen takeover  */
+          muted                        /* required for mobile preload        */
+          preload="auto"               /* buffer before the tap              */
+          onEnded={handleEnded}        /* natural completion path            */
           className="absolute inset-0 h-full w-full object-cover"
         >
           <source src="/envelope.webm" type="video/webm" />
+          <source src="/envelope.mp4"  type="video/mp4"  />
         </video>
 
-        {/* "Tap to open" overlay — only shown in idle state */}
+        {/* ── "Tap to open" overlay — only shown in idle state ───────────── */}
         <AnimatePresence>
           {envelopeState === "idle" && (
             <motion.div
