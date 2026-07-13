@@ -100,6 +100,7 @@ export function EnvelopeIntro({ onDone }: { onDone: () => void }) {
           playsInline                  /* prevents iOS fullscreen takeover  */
           muted                        /* required for mobile preload        */
           preload="auto"               /* buffer before the tap              */
+          poster="/envelope-poster.webp"
           onEnded={handleEnded}        /* natural completion path            */
           className="absolute inset-0 h-full w-full object-cover"
         >
