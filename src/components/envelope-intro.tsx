@@ -85,7 +85,7 @@ export function EnvelopeIntro({ onDone }: { onDone: () => void }) {
         initial={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.8, ease: "easeInOut" }}
-        className="fixed inset-0 z-[100] select-none overflow-hidden min-h-[100dvh] bg-[#f8f5f0]"
+        className="fixed inset-0 w-full h-[100dvh] z-50 flex flex-col items-center justify-center bg-[#9A9386] overflow-hidden select-none"
         // Clicking anywhere on the overlay triggers the tap handler
         onClick={handleTap}
         style={{ cursor: envelopeState === "idle" ? "pointer" : "default" }}
@@ -117,7 +117,7 @@ export function EnvelopeIntro({ onDone }: { onDone: () => void }) {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 4 }}
               transition={{ delay: 0.6, duration: 0.6 }}
-              className="absolute inset-x-0 bottom-14 flex flex-col items-center gap-3 pointer-events-none"
+              className="absolute inset-x-0 bottom-14 flex flex-col items-center gap-3 pointer-events-none z-10"
             >
               <motion.p
                 animate={{ opacity: [0.6, 1, 0.6] }}
