@@ -102,7 +102,7 @@ export function EnvelopeIntro({ onDone }: { onDone: () => void }) {
           preload="auto"               /* buffer before the tap              */
           poster="/envelope-poster.webp"
           onEnded={handleEnded}        /* natural completion path            */
-          className="absolute inset-0 h-full w-full object-cover"
+          className="absolute inset-0 h-full w-full object-cover bg-[#9A9386]"
         >
           <source src="/envelope.webm" type="video/webm" />
           <source src="/envelope.mp4"  type="video/mp4"  />
