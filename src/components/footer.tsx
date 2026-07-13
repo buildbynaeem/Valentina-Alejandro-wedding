@@ -19,7 +19,14 @@ export function Footer() {
         </FadeUp>
       </div>
       <div className="mt-20 text-center text-[10px] tracked text-ink/35">
-        {t.footer.credit}
+        <a
+          href="https://www.instagram.com/zylo.invites"
+          target="_blank"
+          rel="noreferrer"
+          className="hover:text-gold transition-colors duration-300"
+        >
+          {t.footer.credit}
+        </a>
       </div>
     </footer>
   );
