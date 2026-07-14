@@ -24,7 +24,7 @@ export function Nav() {
     <header className="fixed top-0 inset-x-0 z-50 bg-transparent">
       <div className="mx-auto max-w-7xl px-6 md:px-10 h-16 md:h-20 flex items-center justify-between">
         <a href="#top" className="font-serif text-lg md:text-xl tracking-tight">
-          M <span className="text-gold">&</span> M
+          V <span className="text-gold">&</span> A
         </a>
 
 
@@ -33,7 +33,7 @@ export function Nav() {
           role="group"
           aria-label="Language"
         >
-          {(["ES", "DE", "EN"] as Lang[]).map((l) => (
+          {(["ES", "EN"] as Lang[]).map((l) => (
             <button
               key={l}
               onClick={() => setLang(l)}

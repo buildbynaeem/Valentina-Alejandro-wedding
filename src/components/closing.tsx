@@ -4,8 +4,8 @@ import { FadeUp } from "./fade-up";
 import { Copy, Check } from "lucide-react";
 
 const IBANS = [
-  { name: "Miriam", iban: "LT62 3250 0044 7852 1836" },
-  { name: "Michael", iban: "DE79 2013 0600 2014 2846 41" },
+  { name: "Valentina", iban: "LT62 3250 0044 7852 1836" },
+  { name: "Alejandro", iban: "DE79 2013 0600 2014 2846 41" },
 ];
 
 function IbanRow({

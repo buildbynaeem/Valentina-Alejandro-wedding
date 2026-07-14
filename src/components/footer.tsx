@@ -13,7 +13,7 @@ export function Footer() {
           </p>
           <div className="mt-10 flex items-center justify-center gap-6 text-[11px] tracked text-ink/50">
             <span className="h-px w-12 bg-gold/50" />
-            <span>Miriam & Michael</span>
+            <span>Valentina & Alejandro</span>
             <span className="h-px w-12 bg-gold/50" />
           </div>
         </FadeUp>

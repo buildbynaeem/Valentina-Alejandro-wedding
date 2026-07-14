@@ -33,7 +33,7 @@ export function Hero() {
           transition={{ delay: 0.6, duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
           className="mt-6 font-serif italic font-normal text-[15vw] md:text-[9rem] leading-[0.95] tracking-tight"
         >
-          Miriam <span className="not-italic text-gold">&</span> Michael
+          Valentina <span className="not-italic text-gold">&</span> Alejandro
         </motion.h1>
 
         <motion.div

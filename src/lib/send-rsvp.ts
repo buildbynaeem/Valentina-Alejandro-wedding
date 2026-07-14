@@ -8,7 +8,7 @@ const RsvpSchema = z.object({
   attendance: z.enum(["yes", "no"]),
   dietary: z.string().optional().default(""),
   resopon: z.enum(["sweet", "salty"]).nullable().optional(),
-  language: z.enum(["ES", "DE", "EN"]).default("EN"),
+  language: z.enum(["ES", "EN"]).default("EN"),
 });
 
 export type RsvpPayload = z.infer<typeof RsvpSchema>;
@@ -36,7 +36,6 @@ export const sendRsvp = createServerFn({ method: "POST" })
 
     const langLabels: Record<string, string> = {
       ES: "Spanish 🇪🇸",
-      DE: "German 🇩🇪",
       EN: "English 🇬🇧",
     };
 
@@ -48,7 +47,7 @@ export const sendRsvp = createServerFn({ method: "POST" })
         <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; background: #faf8f4; padding: 40px 36px; border-radius: 4px; color: #1a1a1a;">
           
           <h1 style="font-style: italic; color: #C5A880; margin: 0 0 4px; font-size: 28px;">New RSVP</h1>
-          <p style="margin: 0 0 24px; color: #888; font-size: 14px;">Miriam &amp; Michael · 02.10.2027 · Valencia, Spain</p>
+          <p style="margin: 0 0 24px; color: #888; font-size: 14px;">Valentina &amp; Alejandro · 15.05.2027 · Valencia, Spain</p>
           <hr style="border: none; border-top: 1px solid #C5A880; opacity: 0.35; margin-bottom: 28px;" />
 
           <table style="width: 100%; border-collapse: collapse;">
