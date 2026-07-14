@@ -12,12 +12,12 @@ import {
 import { cn } from "@/lib/utils";
 
 const IMAGES = [
-  { src: "/Moments/1.webp", alt: "Moment 1", title: "Valentina & Alejandro" },
-  { src: "/Moments/2.webp", alt: "Moment 2", title: "Together" },
-  { src: "/Moments/3.webp", alt: "Moment 3", title: "Seville" },
-  { src: "/Moments/4.webp", alt: "Moment 4", title: "Our Dream Trip" },
-  { src: "/Moments/5.webp", alt: "Moment 5", title: "Trusting the process" },
-  { src: "/Moments/6.webp", alt: "Moment 6", title: "Same Direction" },
+  { src: "/Moments/1.webp", alt: "Moment 1" },
+  { src: "/Moments/2.webp", alt: "Moment 2" },
+  { src: "/Moments/3.webp", alt: "Moment 3" },
+  { src: "/Moments/4.webp", alt: "Moment 4" },
+  { src: "/Moments/5.webp", alt: "Moment 5" },
+  { src: "/Moments/6.webp", alt: "Moment 6" },
 ];
 
 export function Gallery() {
@@ -88,7 +88,7 @@ export function Gallery() {
                       transition={{ duration: 0.4 }}
                       className="absolute bottom-0 left-0 flex h-[14%] w-full translate-y-full items-center justify-center text-center font-serif italic text-ink/40 tracking-wide text-sm"
                     >
-                      {img.title}
+                      {t.gallery.images[index].title}
                     </motion.div>
                   )}
                 </AnimatePresence>

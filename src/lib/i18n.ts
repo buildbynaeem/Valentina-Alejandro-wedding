@@ -21,7 +21,18 @@ export const translations = {
         { year: "Para siempre", title: "Juntos", text: "El comienzo de nuestra mayor aventura. Se acabaron las despedidas en el aeropuerto; nos espera toda una vida de amaneceres juntos." },
       ],
     },
-    gallery: { kicker: "Momentos", title: "Capítulos en imágenes" },
+    gallery: {
+      kicker: "Momentos",
+      title: "Capítulos en imágenes",
+      images: [
+        { title: "Nuestro Refugio" },
+        { title: "Nuestro Propio Mundo" },
+        { title: "La Promesa" },
+        { title: "Cada Paso Juntos" },
+        { title: "Bajo las Estrellas" },
+        { title: "El Mejor Sí" },
+      ],
+    },
     details: {
       kicker: "LA CEREMONIA",
       title: "Detalles del Evento",
@@ -85,7 +96,18 @@ export const translations = {
         { year: "Forever", title: "Together", text: "The beginning of our greatest adventure. No more goodbyes at the airport, just a lifetime of mornings together." },
       ],
     },
-    gallery: { kicker: "Moments", title: "Chapters in pictures" },
+    gallery: {
+      kicker: "Moments",
+      title: "Chapters in pictures",
+      images: [
+        { title: "Quiet Moments" },
+        { title: "Our Own World" },
+        { title: "The Promise" },
+        { title: "Every Step Together" },
+        { title: "Under the Stars" },
+        { title: "The Easiest Yes" },
+      ],
+    },
     details: {
       kicker: "THE CEREMONIA",
       title: "Event Details",
